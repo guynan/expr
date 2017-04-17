@@ -2,6 +2,7 @@
 RM=/bin/rm
 PREFIX=/usr/local
 MAN=/share/man
+#MAN=/man #BSD uncomment
 CC=clang
 CFLAGS+= -O2 -Wall -g -pedantic
 LDFLAGS+= -lm
