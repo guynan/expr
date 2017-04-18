@@ -8,12 +8,12 @@ polex \- Evaluate reverse Polish polexessions
 ]
 
 .SH DESCRIPTION
-Evaluates reverse Polish (postfix polexessions) as an argument list and prints the result to stdout.
+Evaluates reverse Polish (postfix expressions) as an argument list and prints the result to stdout.
 .B polex 
-can evaluate polexessions in 64 bits. As it is a stack implementation - all incorrect polexessions will evaluate silently.
+can evaluate expressions in 64 bits. As it is a stack implementation - all incorrect expressions will evaluate silently.
 
 .SH OPERATORS
-The only allowed polexessions are with the +, \-, /, *, ^; addition, subtraction, integer division, multiplication and exponentiation. 
+The only allowed expressions are with the +, \-, /, *, ^; addition, subtraction, integer division, multiplication and exponentiation. 
 Make sure to always escape your asterisks else your multiplication results will include the shell asterisk expansion. 
 
 .SH EXAMPLES
