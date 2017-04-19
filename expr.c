@@ -1,19 +1,21 @@
 /* expr: evaluates a reverse Polish Expression */
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
+#include <inttypes.h>
 #include <math.h>
 
 
 #define STACK_HEIGHT    100
-int stackc = 0; /* global stack counter */
+int stackc = 0;         /* global stack counter */
 
 
-int calculate (int op1, int op2, char operator);
+int64_t calculate(int64_t op1, int64_t op2, char operator);
+void push(int64_t c, int64_t *stack);
 int main(int argc, char **argv);
-void push(int c, int *stack);
-int strtoint(char *arr);
+int64_t strtoint(char *arr);
+int64_t pop(int64_t *stack);
 int isSign(char *arg);
-int pop(int *stack);
 int len(char *arr);
 
 
@@ -25,10 +27,10 @@ int main(int argc, char **argv)
                 return 1;
         }
 
-        int i, res, op1, op2;
+        int64_t i, res, op1, op2;
 
         /* Initialising an array to become our stack */
-        int *stack = calloc(STACK_HEIGHT, sizeof(int));
+        int64_t *stack = calloc(STACK_HEIGHT, sizeof(int64_t));
 
         for (int c = 1 ; c < argc; c++){
                 if(isSign(argv[c])){
@@ -47,7 +49,7 @@ int main(int argc, char **argv)
                 }
         }
 
-        printf("%d\n", stack[stackc]);
+        printf("%" PRId64 "\n", stack[stackc]); // TODO
 
         return 0;
 
@@ -55,7 +57,7 @@ int main(int argc, char **argv)
 
 /* Push a character onto the top of
  * the stack and increment stack counter */
-void push(int c, int *stack)
+void push(int64_t c, int64_t *stack)
 {
         /* Problem here is the first push... 
          * ie when stackc == 0 */
@@ -66,7 +68,7 @@ void push(int c, int *stack)
 /* Passing in the reference to the stack 
  * resets the top value and returns the
  * value of the top of the stack */
-int pop(int *stack)
+int64_t pop(int64_t *stack)
 {
         /* Speed up: Have a stack pointer that points 
          * to the top of the stack */
@@ -88,7 +90,7 @@ int isSign(char *arg)
 }
 
 
-int calculate (int op1, int op2, char operator)
+int64_t calculate (int64_t op1, int64_t op2, char operator)
 {
         switch((int) operator){
                 case '+' : return (op1 + op2);
@@ -102,6 +104,7 @@ int calculate (int op1, int op2, char operator)
 }
 
 
+/* Simply returns the length of a char array */
 int len(char *arr)
 {
         int i = 0;
@@ -112,9 +115,9 @@ int len(char *arr)
 }
 
 
-int strtoint(char *arr)    
+int64_t strtoint(char *arr)    
 {
-        int dec = 0;
+        int64_t dec = 0;
 
         for( ; *arr != '\0'; dec = dec * 10 + (*arr++ - '0'))
                 ;
