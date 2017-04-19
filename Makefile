@@ -16,5 +16,5 @@ clean:
 
 install:
 	install -pm 755 polex 		$(PREFIX)/bin
-	test d $(PREFIX)$(MAN)/man1 || mkdir -p $(PREFIX)$(MAN)/man1
+	test -d $(PREFIX)$(MAN)/man1 || mkdir -p $(PREFIX)$(MAN)/man1
 	install -pm 644 polex.man 	$(PREFIX)$(MAN)/man1/polex.1
