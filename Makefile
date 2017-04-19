@@ -18,3 +18,7 @@ install:
 	install -pm 755 polex 		$(PREFIX)/bin
 	test -d $(PREFIX)$(MAN)/man1 || mkdir -p $(PREFIX)$(MAN)/man1
 	install -pm 644 polex.man 	$(PREFIX)$(MAN)/man1/polex.1
+
+uninstall:
+	$(RM) $(PREFIX)/bin/polex
+	$(RM) $(PREFIX)$(MAN)/man1/polex.1
