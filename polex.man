@@ -1,0 +1,27 @@
+.TH polex 1 "April 19, 2017" "" ""
+.SH NAME
+polex \- Evaluate reverse Polish polexessions
+.SH SYNOPSIS
+.B polex
+[ 
+.B postfix polexession
+]
+
+.SH DESCRIPTION
+Evaluates reverse Polish (postfix polexessions) as an argument list and prints the result to stdout.
+.B polex 
+can evaluate polexessions in 64 bits. As it is a stack implementation - all incorrect polexessions will evaluate silently.
+
+.SH OPERATORS
+The only allowed polexessions are with the +, \-, /, *, ^; addition, subtraction, integer division, multiplication and exponentiation. 
+Make sure to always escape your asterisks else your multiplication results will include the shell asterisk expansion. 
+
+.SH EXAMPLES
+polex 2 3 \\* 
+
+Will evaluate to 6.
+
+
+
+.SH AUTHOR
+Guy Nankivell <guynankivell@gmail.com>

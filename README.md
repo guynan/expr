@@ -1,2 +1,2 @@
-# expr
+# POLEX
 Evaluates reverse Polish expressions
