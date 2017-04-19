@@ -1,0 +1,22 @@
+.TH expr 1 "April 19, 2017" "" ""
+.SH NAME
+expr \- Evaluate reverse Polish expressions
+.SH SYNOPSIS
+.B expr
+[ 
+.B postfix expression
+]
+
+.SH DESCRIPTION
+Evaluates reverse Polish (postfix expressions) as an argument list and prints the result to stdout.
+
+.SH OPERATORS
+The only allowed expressions are with the +, \-, /, *, ^; addition, subtraction, integer division, multiplication and exponentiation. 
+Make sure to always escape your asterisks else your multiplication results won't look right.
+
+.SH EXAMPLES
+expr 2 3 *
+
+
+.SH AUTHOR
+Guy Nankivell <guynankivell@gmail.com>
