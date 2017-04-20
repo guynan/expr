@@ -1,4 +1,14 @@
-/* expr: evaluates a reverse Polish Expression */
+
+/* Polex: evaluates a reverse Polish Expression 
+ * it accepts operations of addition, subtraction, 
+ * multiplication, exponentiation and integer 
+ * division. It evaluates in 64 bits and has a 
+ * stack size of 100 elements which is more than 
+ * enough to get by with. This was a fun afternoon
+ * exercise because I like reverse Polish notation 
+ *
+ * Guy Nankivell */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
