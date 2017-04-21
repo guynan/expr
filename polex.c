@@ -42,19 +42,19 @@ int main(int argc, char **argv)
         /* Initialising an array to become our stack */
         int64_t *stack = calloc(STACK_HEIGHT, sizeof(int64_t));
 
-        for (int c = 1 ; c < argc; c++){
-                if(isSign(argv[c])){
+        for ( ; *argv; argv++){
+                if(isSign(*argv)){
                         op2 = pop(stack);
                         op1 = pop(stack);
 
                         /* Dereference here is kinda safe because we
                          * check in the isSign() function */
-                        res = calculate(op1, op2, *argv[c]); 
+                        res = calculate(op1, op2, **argv); 
                         push(res, stack);
 
                 } else {
 
-                        i = strtoint(argv[c]);
+                        i = strtoint(*argv);
                         push(i, stack);
                 }
         }
