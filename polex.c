@@ -16,16 +16,16 @@
 #include <math.h>
 
 
-#define STACK_HEIGHT    100
-int stackc = 0;         /* global stack counter */
+#define STACK_HEIGHT    100 /* This is very generous */
 
 
-int64_t calculate(int64_t op1, int64_t op2, char operator); void push(int64_t c, int64_t *stack);
-int main(int argc, char **argv);
-int64_t strtoint(char *arr);
-int64_t pop(int64_t *stack);
-int isSign(char *arg);
-int len(char *arr);
+int64_t calculate(int64_t op1, int64_t op2, char operator); 
+void push(int64_t c, int64_t** stp);
+int main(int argc, char** argv);
+int64_t strtoint(char* arr);
+int64_t pop(int64_t** stp);
+int isSign(char* arg);
+int len(char* arr);
 
 
 int main(int argc, char **argv)
@@ -41,52 +41,56 @@ int main(int argc, char **argv)
         /* Initialising an array to become our stack */
         int64_t *stack = calloc(STACK_HEIGHT, sizeof(int64_t));
 
+        /* Our stack pointer to speed up pop/peek operations */ 
+        int64_t *sptr = &stack[0];
+
         for ( ; *argv; argv++){
                 if(isSign(*argv)){
-                        op2 = pop(stack);
-                        op1 = pop(stack);
+                        op2 = pop(&sptr);
+                        op1 = pop(&sptr);
 
                         /* Dereference here is kinda safe because we
                          * check in the isSign() function */
                         res = calculate(op1, op2, **argv); 
-                        push(res, stack);
+                        push(res, &sptr);
 
                 } else {
 
                         i = strtoint(*argv);
-                        push(i, stack);
+                        push(i, &sptr);
                 }
         }
 
-        printf("%" PRId64 "\n", stack[stackc]); // TODO
+        printf("%" PRId64 "\n", *sptr); 
 
         return 0;
 
 }
 
 /* Push a character onto the top of
- * the stack and increment stack counter */
-void push(int64_t c, int64_t *stack)
+ * the stack and increment the stack pointer */
+void push(int64_t c, int64_t**  sptr)
 {
         /* Problem here is the first push... 
          * ie when stackc == 0 */
-        stack[++stackc] = c;
+        ++(*sptr);
+        **sptr = c;
 }
 
 
-/* Passing in the reference to the stack 
- * resets the top value and returns the
+/* Passing in the reference to the stack,
+ * decrements the stack pointer and returns the
  * value of the top of the stack */
-int64_t pop(int64_t *stack)
+int64_t pop(int64_t** sptr)
 {
-        /* Speed up: Have a stack pointer that points 
-         * to the top of the stack */
-        int res = stack[stackc--]; 
-        return res;
+        int64_t val = **sptr;
+        (*sptr)--;
+
+        return val;
 }
 
 
-int isSign(char *arg)
+int isSign(char* arg)
 {
         if(len(arg) != 1) return 0;
 
@@ -114,7 +118,7 @@ int64_t calculate (int64_t op1, int64_t op2, char operator)
 
 
 /* Simply returns the length of a char array */
-int len(char *arr)
+int len(char* arr)
 {
         int i = 0;
 
@@ -124,7 +128,7 @@ int len(char *arr)
 }
 
 
-int64_t strtoint(char *arr)    
+int64_t strtoint(char* arr)    
 {
         int64_t dec = 0;
 
@@ -133,5 +137,4 @@ int64_t strtoint(char *arr)
 
         return dec;
 }
-
 
