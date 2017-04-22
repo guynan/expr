@@ -20,8 +20,7 @@
 int stackc = 0;         /* global stack counter */
 
 
-int64_t calculate(int64_t op1, int64_t op2, char operator);
-void push(int64_t c, int64_t *stack);
+int64_t calculate(int64_t op1, int64_t op2, char operator); void push(int64_t c, int64_t *stack);
 int main(int argc, char **argv);
 int64_t strtoint(char *arr);
 int64_t pop(int64_t *stack);
@@ -33,7 +32,7 @@ int main(int argc, char **argv)
 {
         /* If we aren't passing in enough values */
         if(argc == 1){
-                printf("Usage: expr [postfix expression]\n");
+                printf("Usage: polex [postfix expression]\n");
                 return 1;
         }
 
